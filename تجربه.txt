@@ -3269,3 +3269,33 @@ local args = {
 game:GetService("ReplicatedStorage").RE:FindFirstChild("1NoMoto1rVehicle1s"):FireServer(unpack(args))
   end
 })
+-- ✔️ تاب أدوات قتل و فلنق
+local Troll = MakeTab({Name = "أدوات قتل و فلنق"})
+
+AddButton(Troll, {
+    Name = "فلنق ابواب",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/%D9%81%D9%84%D9%86%D9%82%20%D8%A3%D8%A8%D9%88%D8%A7%D8%A8.txt"))()
+    end
+})
+
+AddButton(Troll, {
+    Name = "فلنق كنب",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/%D9%83%D9%86%D8%A8.txt"))()
+    end
+})
+
+AddButton(Troll, {
+    Name = "فلنق كره",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/%D9%83%D9%86%D8%A8.txt"))()
+    end
+})
+
+AddButton(Troll, {
+    Name = "اداه ادمن",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/%D8%A7%D8%AF%D8%A7%D9%87%20%D8%A7%D8%AF%D9%85%D9%86.txt"))()
+    end
+})
