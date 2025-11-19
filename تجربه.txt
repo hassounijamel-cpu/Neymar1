@@ -3270,32 +3270,39 @@ game:GetService("ReplicatedStorage").RE:FindFirstChild("1NoMoto1rVehicle1s"):Fir
   end
 })
 -- ✔️ تاب أدوات قتل و فلنق
-local Troll = MakeTab({Name = "أدوات قتل و فلنق"})
+local Troll = MakeTab({Name = "اشياء fe"})
 
 AddButton(Troll, {
-    Name = "فلنق ابواب",
+    Name = "1x1x1x1",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/%D9%81%D9%84%D9%86%D9%82%20%D8%A3%D8%A8%D9%88%D8%A7%D8%A8.txt"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Fe1/refs/heads/main/1x1x1x1%20do%20SHNMAX%20by%20shad0wz%20(1)"))()
     end
 })
 
 AddButton(Troll, {
-    Name = "فلنق كنب",
+    Name = "Gubby",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/%D9%83%D9%86%D8%A8.txt"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Fe1/refs/heads/main/Gubby%20do%20shnmax%20by%20shad0ws"))()
     end
 })
 
 AddButton(Troll, {
-    Name = "فلنق كره",
+    Name = "Ban hammer",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/%D9%83%D9%86%D8%A8.txt"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Fe1/refs/heads/main/ban%20hammer%20do%20shnmax%20by%20shad0ws"))()
     end
 })
 
 AddButton(Troll, {
-    Name = "اداه ادمن",
+    Name = "Goner",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/%D8%A7%D8%AF%D8%A7%D9%87%20%D8%A7%D8%AF%D9%85%D9%86.txt"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Fe1/refs/heads/main/goner%20do%20shnmax%20by%20shad0ws%20%F0%9F%A4%A3"))()
+    end
+})
+
+AddButton(Troll, {
+    Name = "سكاي بوكس(تخريب السماء)",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Fe1/refs/heads/main/Sky.txt"))()
     end
 })
