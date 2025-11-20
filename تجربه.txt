@@ -3306,7 +3306,6 @@ AddButton(Troll, {
         loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Fe1/refs/heads/main/Sky.txt"))()
     end
 })
--- ✔️ تاب نسخ سكنات
 local Main = MakeTab({Name = "نسخ سكنات"})
 
 local Players = game:GetService("Players")
@@ -3317,7 +3316,7 @@ local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 local valor_do_nome_do_joagdor
 local Target = nil
 
--- تجيب أسماء اللاعبين
+-- 🔥 قائمة اللاعبين
 local function GetPlayerNames()
     local playerNames = {}
     for _, player in ipairs(Players:GetPlayers()) do
@@ -3328,10 +3327,9 @@ local function GetPlayerNames()
     return playerNames
 end
 
--- قائمة اللاعبين
 local Dropdown = AddDropdown(Main, {
     Name = "قائمة اللاعبين",
-    Description = "اختيار لاعب لنسخ السكن",
+    Description = "اختيار لاعب",
     Options = GetPlayerNames(),
     Default = "",
     Flag = "player_list",
@@ -3341,25 +3339,12 @@ local Dropdown = AddDropdown(Main, {
     end
 })
 
-local function UptadePlayers()
-    Dropdown:Set(GetPlayerNames())
-end
 
-UptadePlayers()
-
+----------------------------------------------------------------
+-- 🔥 زر نسخ السكن (تحت اختيار اللاعب مثل ما طلبت)
+----------------------------------------------------------------
 AddButton(Main, {
-    Name = "تحديث القائمة",
-    Callback = function()
-        UptadePlayers()
-    end
-})
-
-Players.PlayerAdded:Connect(UptadePlayers)
-Players.PlayerRemoving:Connect(UptadePlayers)
-
--- زر نسخ السكن
-AddButton(Main, {
-    Name = "نسخ سكن",
+    Name = "نسخ سكن اللاعب",
     Callback = function()
         if not Target then return end
 
@@ -3374,7 +3359,7 @@ AddButton(Main, {
             if LHumanoid and THumanoid then
                 local LDesc = LHumanoid:GetAppliedDescription()
 
-                -- حذف الشكل القديم
+                -- إزالة السكن الحالي
                 for _, acc in ipairs(LDesc:GetAccessories(true)) do
                     if acc.AssetId and tonumber(acc.AssetId) then
                         Remotes.Wear:InvokeServer(tonumber(acc.AssetId))
@@ -3382,22 +3367,10 @@ AddButton(Main, {
                     end
                 end
 
-                if tonumber(LDesc.Shirt) then
-                    Remotes.Wear:InvokeServer(tonumber(LDesc.Shirt))
-                    task.wait(0.2)
-                end
+                if tonumber(LDesc.Shirt) then Remotes.Wear:InvokeServer(tonumber(LDesc.Shirt)) task.wait(0.2) end
+                if tonumber(LDesc.Pants) then Remotes.Wear:InvokeServer(tonumber(LDesc.Pants)) task.wait(0.2) end
+                if tonumber(LDesc.Face) then Remotes.Wear:InvokeServer(tonumber(LDesc.Face)) task.wait(0.2) end
 
-                if tonumber(LDesc.Pants) then
-                    Remotes.Wear:InvokeServer(tonumber(LDesc.Pants))
-                    task.wait(0.2)
-                end
-
-                if tonumber(LDesc.Face) then
-                    Remotes.Wear:InvokeServer(tonumber(LDesc.Face))
-                    task.wait(0.2)
-                end
-
-                -- نسخ سكن اللاعب المستهدف
                 local PDesc = THumanoid:GetAppliedDescription()
 
                 local argsBody = {
@@ -3413,20 +3386,9 @@ AddButton(Main, {
                 Remotes.ChangeCharacterBody:InvokeServer(unpack(argsBody))
                 task.wait(0.5)
 
-                if tonumber(PDesc.Shirt) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.Shirt))
-                    task.wait(0.3)
-                end
-
-                if tonumber(PDesc.Pants) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.Pants))
-                    task.wait(0.3)
-                end
-
-                if tonumber(PDesc.Face) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.Face))
-                    task.wait(0.3)
-                end
+                if tonumber(PDesc.Shirt) then Remotes.Wear:InvokeServer(tonumber(PDesc.Shirt)) task.wait(0.3) end
+                if tonumber(PDesc.Pants) then Remotes.Wear:InvokeServer(tonumber(PDesc.Pants)) task.wait(0.3) end
+                if tonumber(PDesc.Face) then Remotes.Wear:InvokeServer(tonumber(PDesc.Face)) task.wait(0.3) end
 
                 for _, v in ipairs(PDesc:GetAccessories(true)) do
                     if v.AssetId and tonumber(v.AssetId) then
@@ -3469,3 +3431,22 @@ AddButton(Main, {
         end
     end
 })
+----------------------------------------------------------------
+
+
+-- زر تحديث القائمة
+local function UptadePlayers()
+    Dropdown:Set(GetPlayerNames())
+end
+
+UptadePlayers()
+
+AddButton(Main, {
+    Name = "تحديث القائمة",
+    Callback = function()
+        UptadePlayers()
+    end
+})
+
+Players.PlayerAdded:Connect(UptadePlayers)
+Players.PlayerRemoving:Connect(UptadePlayers)
