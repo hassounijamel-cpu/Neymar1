@@ -1,0 +1,134 @@
+local Main = MakeTab({Name = "سكنات"})
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+
+local Target = nil
+
+-- 🔥 قائمة اللاعبين
+local function GetPlayerNames()
+    local playerNames = {}
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player.Name ~= LocalPlayer.Name then
+            table.insert(playerNames, player.Name)
+        end
+    end
+    return playerNames
+end
+
+local Dropdown = AddDropdown(Main, {
+    Name = "قائمة اللاعبين",
+    Description = "اختيار لاعب",
+    Options = GetPlayerNames(),
+    Default = "",
+    Flag = "player_list",
+    Callback = function(playername)
+        Target = playername
+    end
+})
+
+----------------------------------------------------------------
+-- 🔥 زر نسخ السكن (تحت اختيار اللاعب)
+----------------------------------------------------------------
+AddButton(Main, {
+    Name = "نسخ سكن اللاعب",
+    Callback = function()
+        if not Target then return end
+
+        local LP = Players.LocalPlayer
+        local LChar = LP.Character
+        local TPlayer = Players:FindFirstChild(Target)
+
+        if TPlayer and TPlayer.Character then
+            local LHumanoid = LChar and LChar:FindFirstChildOfClass("Humanoid")
+            local THumanoid = TPlayer.Character:FindFirstChildOfClass("Humanoid")
+
+            if LHumanoid and THumanoid then
+                local LDesc = LHumanoid:GetAppliedDescription()
+
+                for _, acc in ipairs(LDesc:GetAccessories(true)) do
+                    if acc.AssetId and tonumber(acc.AssetId) then
+                        Remotes.Wear:InvokeServer(tonumber(acc.AssetId))
+                        task.wait(0.2)
+                    end
+                end
+
+                if tonumber(LDesc.Shirt) then Remotes.Wear:InvokeServer(tonumber(LDesc.Shirt)) task.wait(0.2) end
+                if tonumber(LDesc.Pants) then Remotes.Wear:InvokeServer(tonumber(LDesc.Pants)) task.wait(0.2) end
+                if tonumber(LDesc.Face) then Remotes.Wear:InvokeServer(tonumber(LDesc.Face)) task.wait(0.2) end
+
+                local PDesc = THumanoid:GetAppliedDescription()
+
+                local argsBody = {
+                    [1] = {
+                        [1] = PDesc.Torso,
+                        [2] = PDesc.RightArm,
+                        [3] = PDesc.LeftArm,
+                        [4] = PDesc.RightLeg,
+                        [5] = PDesc.LeftLeg,
+                        [6] = PDesc.Head
+                    }
+                }
+                Remotes.ChangeCharacterBody:InvokeServer(unpack(argsBody))
+                task.wait(0.5)
+
+                if tonumber(PDesc.Shirt) then Remotes.Wear:InvokeServer(tonumber(PDesc.Shirt)) task.wait(0.3) end
+                if tonumber(PDesc.Pants) then Remotes.Wear:InvokeServer(tonumber(PDesc.Pants)) task.wait(0.3) end
+                if tonumber(PDesc.Face) then Remotes.Wear:InvokeServer(tonumber(PDesc.Face)) task.wait(0.3) end
+
+                for _, v in ipairs(PDesc:GetAccessories(true)) do
+                    if v.AssetId and tonumber(v.AssetId) then
+                        Remotes.Wear:InvokeServer(tonumber(v.AssetId))
+                        task.wait(0.3)
+                    end
+                end
+
+                local SkinColor = TPlayer.Character:FindFirstChild("Body Colors")
+                if SkinColor then
+                    Remotes.ChangeBodyColor:FireServer(tostring(SkinColor.HeadColor))
+                    task.wait(0.3)
+                end
+
+                if tonumber(PDesc.IdleAnimation) then
+                    Remotes.Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
+                    task.wait(0.3)
+                end
+            end
+        end
+    end
+})
+----------------------------------------------------------------
+
+
+----------------------------------------------------------------
+-- 🔥 القسم الجديد + زر R6 (مضاف فوق مثل ما طلبت)
+----------------------------------------------------------------
+AddSection(Main, {"حول سكنك R6"})
+
+AddButton(Main, {
+    Name = "R6",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/R6%20anims.lua"))()
+    end
+})
+----------------------------------------------------------------
+
+
+-- 🔁 تحديث القائمة
+local function UptadePlayers()
+    Dropdown:Set(GetPlayerNames())
+end
+
+UptadePlayers()
+
+AddButton(Main, {
+    Name = "تحديث القائمة",
+    Callback = function()
+        UptadePlayers()
+    end
+})
+
+Players.PlayerAdded:Connect(UptadePlayers)
+Players.PlayerRemoving:Connect(UptadePlayers)
