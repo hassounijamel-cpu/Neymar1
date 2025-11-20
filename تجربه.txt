@@ -180,35 +180,36 @@ AddColorPicker(Detect, {
   end
 })
 
-AddSection(Main, {"حقوق"})
+-- ✔ سكشن الحقوق
+AddSection(Detect, {"حقوق"})
 
-AddDiscord(Main, {
+AddDiscord(Detect, {
     DiscordLink = "https://t.me/ney_marr77",
     DiscordIcon = "rbxassetid://73962170939481",
     DiscordTitle = "قناتي تليجرام"
 })
 
-AddDiscord(Main, {
+AddDiscord(Detect, {
     DiscordLink = "https://t.me/ney_marr77",
     DiscordIcon = "rbxassetid://73962170939481",
     DiscordTitle = "الكروب للسوالف"
 })
 
-AddButton(Main, {
+AddButton(Detect, {
     Name = "نسخ حسابي روبلوكس",
     Callback = function()
         setclipboard("Kdkjdnde")
     end
 })
 
-AddButton(Main, {
+AddButton(Detect, {
     Name = "نسخ حسابي تيك توك",
     Callback = function()
         setclipboard(".90sjc")
     end
 })
 
-AddButton(Main, {
+AddButton(Detect, {
     Name = "نسخ حسابي روبلوكس الثاني",
     Callback = function()
         setclipboard("hgw9t2bk")
