@@ -3440,8 +3440,9 @@ AddButton(Main, {
 
 Players.PlayerAdded:Connect(UptadePlayers)
 Players.PlayerRemoving:Connect(UptadePlayers)
+-- ⚠️❄️ تجميد قوي • Freeze Power ❄️⚠️
 
-local Main = MakeTab({Name = "تجميد"})
+local Main = MakeTab({Name = "❄️ تـجـمـيـد"})
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -3531,13 +3532,13 @@ task.spawn(function()
 end)
 
 ----------------------------------------------------------
--- 🔥 الواجهة V2 (أزرار + Sections + Dropdown فقط)
+-- ❄️ التجميد بالواجهة V2
 ----------------------------------------------------------
 
-AddSection(Main, {"تجميد الكل"})
+AddSection(Main, {"❄️ تجميد الكل"})
 
 AddButton(Main, {
-    Name = "تشغيل تجميد الكل",
+    Name = "تشغيل تجميد الكل ❄️",
     Callback = function()
         isFreezeAll = true
         isFreezeSingle = false
@@ -3545,7 +3546,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "إيقاف تجميد الكل",
+    Name = "إيقاف تجميد الكل ⛔",
     Callback = function()
         isFreezeAll = false
     end
@@ -3553,7 +3554,7 @@ AddButton(Main, {
 
 ----------------------------------------------------------
 
-AddSection(Main, {"تجميد لاعب معيّن"})
+AddSection(Main, {"🎯 تجميد لاعب معيّن"})
 
 -- قائمة اللاعبين
 AddDropdown(Main, {
@@ -3573,9 +3574,8 @@ AddDropdown(Main, {
     end
 })
 
--- تشغيل التجميد الفردي
 AddButton(Main, {
-    Name = "تشغيل تجميد اللاعب",
+    Name = "تشغيل تجميد اللاعب 🔒",
     Callback = function()
         if targetPlayer then
             isFreezeSingle = true
@@ -3585,7 +3585,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "إيقاف تجميد اللاعب",
+    Name = "إيقاف تجميد اللاعب ⛔",
     Callback = function()
         isFreezeSingle = false
     end
