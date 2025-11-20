@@ -3440,3 +3440,220 @@ AddButton(Main, {
 
 Players.PlayerAdded:Connect(UptadePlayers)
 Players.PlayerRemoving:Connect(UptadePlayers)
+local Main = MakeTab({Name = "التلوين"})
+
+-- ⭐ قسم السرعة
+AddSection(Main, {"سرعة التلوين"})
+
+local speedOptions = {"بطيء", "عادي", "سريع", "سريع جداً"}
+getgenv().RGBSpeed = 0.15 -- السرعة الافتراضية
+
+AddDropdown(Main, {
+    Name = "اختر السرعة",
+    Options = speedOptions,
+    Default = "عادي",
+    Callback = function(selected)
+        if selected == "بطيء" then
+            getgenv().RGBSpeed = 0.3
+        elseif selected == "عادي" then
+            getgenv().RGBSpeed = 0.15
+        elseif selected == "سريع" then
+            getgenv().RGBSpeed = 0.07
+        elseif selected == "سريع جداً" then
+            getgenv().RGBSpeed = 0.03
+        end
+    end
+})
+
+-- 🔥🌈 دالة جلب اللون المتغير
+local function getRGB()
+    local h = (tick() % 5) / 5
+    return Color3.fromHSV(h, 1, 1)
+end
+
+local RE = game:GetService("ReplicatedStorage"):WaitForChild("RE")
+
+--------------------------------------------------------------
+-- ⭐⭐  قسم الاسم والبايو
+--------------------------------------------------------------
+
+AddSection(Main, {"تلوين الاسم والبايو"})
+
+AddButton(Main, {
+    Name = "تشغيل تلوين الاسم + البايو",
+    Callback = function()
+        getgenv().rgbNameBio = true
+        task.spawn(function()
+            while getgenv().rgbNameBio do
+                local color = getRGB()
+                pcall(function()
+                    RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", color)
+                    RE["1RPNam1eColo1r"]:FireServer("PickingRPBioColor", color)
+                end)
+                task.wait(getgenv().RGBSpeed)
+            end
+        end)
+    end
+})
+
+AddButton(Main, {
+    Name = "إيقاف التلوين",
+    Callback = function()
+        getgenv().rgbNameBio = false
+    end
+})
+
+--------------------------------------------------------------
+-- ⭐⭐  الشعر
+--------------------------------------------------------------
+
+AddSection(Main, {"الشعر"})
+
+AddButton(Main, {
+    Name = "تشغيل تلوين الشعر",
+    Callback = function()
+        getgenv().rgbHair = true
+        task.spawn(function()
+            while getgenv().rgbHair do
+                pcall(function()
+                    RE["1Max1y"]:FireServer("ChangeHairColor2", getRGB())
+                end)
+                task.wait(getgenv().RGBSpeed)
+            end
+        end)
+    end
+})
+
+AddButton(Main, {
+    Name = "إيقاف تلوين الشعر",
+    Callback = function()
+        getgenv().rgbHair = false
+    end
+})
+
+--------------------------------------------------------------
+-- ⭐⭐  تلوين البيت
+--------------------------------------------------------------
+
+AddSection(Main, {"البيت"})
+
+AddButton(Main, {
+    Name = "تشغيل تلوين البيت",
+    Callback = function()
+        getgenv().rgbHouse = true
+        task.spawn(function()
+            while getgenv().rgbHouse do
+                pcall(function()
+                    RE["1Player1sHous1e"]:FireServer("ColorPickHouse", getRGB())
+                end)
+                task.wait(getgenv().RGBSpeed)
+            end
+        end)
+    end
+})
+
+AddButton(Main, {
+    Name = "إيقاف تلوين البيت",
+    Callback = function()
+        getgenv().rgbHouse = false
+    end
+})
+
+--------------------------------------------------------------
+-- ⭐⭐  السيارات
+--------------------------------------------------------------
+
+AddSection(Main, {"السيارات"})
+
+AddButton(Main, {
+    Name = "تشغيل تلوين السيارات",
+    Callback = function()
+        getgenv().rgbCars = true
+        task.spawn(function()
+            while getgenv().rgbCars do
+                pcall(function()
+                    RE["1Player1sCa1r"]:FireServer("PickingCarColor", getRGB())
+                end)
+                task.wait(getgenv().RGBSpeed)
+            end
+        end)
+    end
+})
+
+AddButton(Main, {
+    Name = "إيقاف تلوين السيارات",
+    Callback = function()
+        getgenv().rgbCars = false
+    end
+})
+
+--------------------------------------------------------------
+-- ⭐⭐  الدراجة
+--------------------------------------------------------------
+
+AddSection(Main, {"الدراجة"})
+
+AddButton(Main, {
+    Name = "تشغيل تلوين الدراجة",
+    Callback = function()
+        getgenv().rgbBike = true
+        task.spawn(function()
+            while getgenv().rgbBike do
+                pcall(function()
+                    RE["1Player1sCa1r"]:FireServer("NoMotorColor", getRGB())
+                end)
+                task.wait(getgenv().RGBSpeed)
+            end
+        end)
+    end
+})
+
+AddButton(Main, {
+    Name = "إيقاف تلوين الدراجة",
+    Callback = function()
+        getgenv().rgbBike = false
+    end
+})
+
+--------------------------------------------------------------
+-- ⭐⭐  الراديو + الأدوات
+--------------------------------------------------------------
+
+AddSection(Main, {"الأدوات"})
+
+AddButton(Main, {
+    Name = "تشغيل تلوين الراديو",
+    Callback = function()
+        getgenv().rgbRadio = true
+        task.spawn(function()
+            while getgenv().rgbRadio do
+                local color = getRGB()
+                local gui = game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+
+                if gui then
+                    local toolGui = gui:FindFirstChild("ToolGui")
+                    if toolGui then
+                        local settings = toolGui:FindFirstChild("ToolSettings")
+                        if settings then
+                            local props = settings.Settings:FindFirstChild("PropsColor")
+                            if props and props:FindFirstChild("SetColor") then
+                                pcall(function()
+                                    props.SetColor:FireServer(color)
+                                end)
+                            end
+                        end
+                    end
+                end
+
+                task.wait(getgenv().RGBSpeed)
+            end
+        end)
+    end
+})
+
+AddButton(Main, {
+    Name = "إيقاف تلوين الراديو",
+    Callback = function()
+        getgenv().rgbRadio = false
+    end
+})
