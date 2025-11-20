@@ -3450,3 +3450,12 @@ AddButton(Main, {
 
 Players.PlayerAdded:Connect(UptadePlayers)
 Players.PlayerRemoving:Connect(UptadePlayers)
+
+AddSection(Main, {"حول سكنك R6"})
+
+AddButton(Troll, {
+    Name = "R6",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/R6%20anims.lua"))()
+    end
+})
