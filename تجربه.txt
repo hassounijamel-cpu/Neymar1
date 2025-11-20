@@ -98,8 +98,26 @@ screenGui:Destroy()
 -- 🔥 بعد الإنيميشن — تنفتح الواجهة
 -- =========================
 
+-- REDz Library V2
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/sajjadd2009igh-ship-it/Remix-Hub/refs/heads/main/Remixgui.lua")))()
 
+-- 🟦 نظام تشغيل الصوت عند الضغط على أي زر
+local UIS = game:GetService("UserInputService")
+local Sound = Instance.new("Sound")
+Sound.SoundId = "rbxassetid://452267918" -- صوت الضغط
+Sound.Volume = 1
+Sound.Parent = game:GetService("SoundService")
+
+UIS.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        Sound:Play()
+        task.delay(1, function()
+            Sound:Stop()
+        end)
+    end
+end)
+
+-- 🟦 إنشاء الواجهة
 MakeWindow({
   Hub = {
     Title = "Neymar HUB",
@@ -120,52 +138,15 @@ MakeWindow({
   }
 })
 
+-- 🟦 زر التصغير مع الصورة اللي طلبتها
 MinimizeButton({
-  Image = "",
+  Image = "rbxassetid://118164042452251", -- ← هنا الصورة
   Size = {40, 40},
   Color = Color3.fromRGB(10, 10, 10),
   Corner = true,
   Stroke = false,
   StrokeColor = Color3.fromRGB(255, 0, 0)
 })
-
------------------------------------------------------------------------
--- ✔ تاب المعلومات
-local Info = MakeTab({Name = "الــمعلومات"})
-
-AddDiscord(Info, {
-    DiscordLink = "https://t.me/ney_marr77",
-    DiscordIcon = "rbxassetid://73962170939481",
-    DiscordTitle = "قناتي تليجرام"
-})
-
-AddDiscord(Info, {
-    DiscordLink = "https://t.me/ney_marr77",
-    DiscordIcon = "rbxassetid://73962170939481",
-    DiscordTitle = "الگروب للسوالف"
-})
-
-AddButton(Info, {
-  Name = "نسخ حسابي روبلوكس",
-  Callback = function()
-    setclipboard('Kdkjdnde')
-  end
-})
-
-AddButton(Info, {
-  Name = "نسخ حسابي تيك توك",
-  Callback = function()
-    setclipboard('ney_marr2')
-  end
-})
-
-AddButton(Info, {
-  Name = "نسخ حسابي روبلوكس الثاني",
-  Callback = function()
-    setclipboard('hgw9t2bk')
-  end
-})
-
 -----------------------------------------------------------------------
 -- ✔ تاب الكشف ESP
 local Detect = MakeTab({Name = "الـكشف"})
