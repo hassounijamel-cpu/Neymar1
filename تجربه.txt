@@ -3306,14 +3306,13 @@ AddButton(Troll, {
         loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Fe1/refs/heads/main/Sky.txt"))()
     end
 })
-local Main = MakeTab({Name = "نسخ سكنات"})
+local Main = MakeTab({Name = "سكنات"})
 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 
-local valor_do_nome_do_joagdor
 local Target = nil
 
 -- 🔥 قائمة اللاعبين
@@ -3334,14 +3333,12 @@ local Dropdown = AddDropdown(Main, {
     Default = "",
     Flag = "player_list",
     Callback = function(playername)
-        valor_do_nome_do_joagdor = playername
         Target = playername
     end
 })
 
-
 ----------------------------------------------------------------
--- 🔥 زر نسخ السكن (تحت اختيار اللاعب مثل ما طلبت)
+-- 🔥 زر نسخ السكن (تحت اختيار اللاعب)
 ----------------------------------------------------------------
 AddButton(Main, {
     Name = "نسخ سكن اللاعب",
@@ -3359,7 +3356,6 @@ AddButton(Main, {
             if LHumanoid and THumanoid then
                 local LDesc = LHumanoid:GetAppliedDescription()
 
-                -- إزالة السكن الحالي
                 for _, acc in ipairs(LDesc:GetAccessories(true)) do
                     if acc.AssetId and tonumber(acc.AssetId) then
                         Remotes.Wear:InvokeServer(tonumber(acc.AssetId))
@@ -3407,26 +3403,6 @@ AddButton(Main, {
                     Remotes.Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
                     task.wait(0.3)
                 end
-
-                local Bag = TPlayer:FindFirstChild("PlayersBag")
-                if Bag then
-                    if Bag:FindFirstChild("RPName") and Bag.RPName.Value ~= "" then
-                        Remotes.RPNameText:FireServer("RolePlayName", Bag.RPName.Value)
-                        task.wait(0.3)
-                    end
-                    if Bag:FindFirstChild("RPBio") and Bag.RPBio.Value ~= "" then
-                        Remotes.RPNameText:FireServer("RolePlayBio", Bag.RPBio.Value)
-                        task.wait(0.3)
-                    end
-                    if Bag:FindFirstChild("RPNameColor") then
-                        Remotes.RPNameColor:FireServer("PickingRPNameColor", Bag.RPNameColor.Value)
-                        task.wait(0.3)
-                    end
-                    if Bag:FindFirstChild("RPBioColor") then
-                        Remotes.RPNameColor:FireServer("PickingRPBioColor", Bag.RPBioColor.Value)
-                        task.wait(0.3)
-                    end
-                end
             end
         end
     end
@@ -3434,7 +3410,21 @@ AddButton(Main, {
 ----------------------------------------------------------------
 
 
--- زر تحديث القائمة
+----------------------------------------------------------------
+-- 🔥 القسم الجديد + زر R6 (مضاف فوق مثل ما طلبت)
+----------------------------------------------------------------
+AddSection(Main, {"حول سكنك R6"})
+
+AddButton(Main, {
+    Name = "R6",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/R6%20anims.lua"))()
+    end
+})
+----------------------------------------------------------------
+
+
+-- 🔁 تحديث القائمة
 local function UptadePlayers()
     Dropdown:Set(GetPlayerNames())
 end
@@ -3450,13 +3440,3 @@ AddButton(Main, {
 
 Players.PlayerAdded:Connect(UptadePlayers)
 Players.PlayerRemoving:Connect(UptadePlayers)
--- خانة جديدة
-AddSection(Main, {"حول سكنك R6"})
-
--- زر داخل نفس التاب
-AddButton(Main, {
-    Name = "R6",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/R6%20anims.lua"))()
-    end
-})
