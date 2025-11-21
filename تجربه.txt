@@ -4011,7 +4011,6 @@ AddButton(Troll, {
 
 AddSection(Main, {"لاعب"})
 
-
 local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
 ESP:Toggle(true)
 ESP.Players = false
@@ -4323,6 +4322,198 @@ AddButton(Main, {
 AddSection(Main, {"🎯 تجميد لاعب معيّن"})
 
 -- قائمة اللاعبين
+AddDropdown(Main, {
+    Name = "اختر اللاعب",
+    Options = (function()
+        local list = {}
+        for _, p in ipairs(Players:GetPlayers()) do
+            if p ~= Player then
+                table.insert(list, p.Name)
+            end
+        end
+        return list
+    end)(),
+    Default = "",
+    Callback = function(selected)
+        targetPlayer = Players:FindFirstChild(selected)
+    end
+})
+
+AddButton(Main, {
+    Name = "تشغيل تجميد اللاعب 🔒",
+    Callback = function()
+        if targetPlayer then
+            isFreezeSingle = true
+            isFreezeAll = false
+        end
+    end
+})
+
+AddButton(Main, {
+    Name = "إيقاف تجميد اللاعب ⛔",
+    Callback = function()
+        isFreezeSingle = false
+    end
+})
+
+AddSection(Main, {"تحميد قوي"})
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Player = Players.LocalPlayer
+
+-- الريموتات
+local RE = ReplicatedStorage:WaitForChild("RE")
+local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
+local ToolEvent = RE:FindFirstChild("1Too1l")
+local FireEvent = RE:FindFirstChild("1Gu1n")
+
+-- حالات التجميد
+local isFreezeAll = false
+local isFreezeSingle = false
+local targetPlayer = nil
+
+----------------------------------------------------------
+-- 🔧 تنظيف الأدوات
+----------------------------------------------------------
+local function clearAllTools()
+    if ClearEvent then
+        ClearEvent:FireServer("ClearAllTools")
+    end
+end
+
+----------------------------------------------------------
+-- 🔫 الحصول على السلاح
+----------------------------------------------------------
+local function getAssault()
+    if ToolEvent then
+        ToolEvent:InvokeServer("PickingTools", "Assault")
+    end
+end
+
+----------------------------------------------------------
+-- 🧰 هل عندك السلاح؟
+----------------------------------------------------------
+local function hasAssault()
+    local backpack = Player:FindFirstChild("Backpack")
+    local character = Player.Character
+    return (backpack and backpack:FindFirstChild("Assault"))
+        or (character and character:FindFirstChild("Assault"))
+end
+
+----------------------------------------------------------
+-- ❄️ أقوى إطلاق Freeze Power
+----------------------------------------------------------
+local function fireAtPart(targetPart)
+    if not targetPart then return end
+
+    local gunScript
+    local char = Player.Character
+
+    if char and char:FindFirstChild("Assault") then
+        gunScript = char.Assault:FindFirstChild("GunScript_Local")
+    elseif Player.Backpack and Player.Backpack:FindFirstChild("Assault") then
+        gunScript = Player.Backpack.Assault:FindFirstChild("GunScript_Local")
+    end
+
+    if not gunScript then return end
+
+    -- قوة عالية جداً تحاكي 100 مليون ضربة
+    local freezePower = {
+        100000000,
+        Vector3.new(1e8, 1e8, 1e8),
+        BrickColor.new(29),
+        0.25,
+        Enum.Material.SmoothPlastic,
+        0.25
+    }
+
+    local args = {
+        targetPart,
+        targetPart,
+        Vector3.new(1e14, 1e14, 1e14),
+        targetPart.Position,
+        gunScript:FindFirstChild("MuzzleEffect"),
+        gunScript:FindFirstChild("HitEffect"),
+        0,
+        0,
+        { false },
+        freezePower,
+        true,
+        false
+    }
+
+    -- Turbo Freeze 20 مرة فورية
+    for i = 1, 20 do
+        FireEvent:FireServer(unpack(args))
+    end
+end
+
+----------------------------------------------------------
+-- ♻️ الحلقة الأساسية
+----------------------------------------------------------
+task.spawn(function()
+    while true do
+        if isFreezeAll or isFreezeSingle then
+            clearAllTools()
+            getAssault()
+
+            repeat task.wait(0.2)
+            until hasAssault() or not (isFreezeAll or isFreezeSingle)
+
+            if hasAssault() then
+
+                -- تجميد الكل
+                if isFreezeAll then
+                    for _, p in ipairs(Players:GetPlayers()) do
+                        if not isFreezeAll then break end
+                        if p ~= Player and p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
+                            fireAtPart(p.Character.HumanoidRootPart)
+                            task.wait(0.02)
+                        end
+                    end
+                end
+
+                -- تجميد لاعب معيّن
+                if isFreezeSingle and targetPlayer
+                    and targetPlayer.Character
+                    and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    
+                    fireAtPart(targetPlayer.Character.HumanoidRootPart)
+                    task.wait(0.02)
+                end
+            end
+        end
+
+        task.wait(0.2)
+    end
+end)
+
+----------------------------------------------------------
+-- ⚙️ الواجهة
+----------------------------------------------------------
+
+AddSection(Main, {"❄️ تجميد الكل"})
+
+AddButton(Main, {
+    Name = "تشغيل تجميد الكل ❄️",
+    Callback = function()
+        isFreezeAll = true
+        isFreezeSingle = false
+    end
+})
+
+AddButton(Main, {
+    Name = "إيقاف تجميد الكل ⛔",
+    Callback = function()
+        isFreezeAll = false
+    end
+})
+
+----------------------------------------------------------
+
+AddSection(Main, {"🎯 تجميد لاعب معيّن"})
+
 AddDropdown(Main, {
     Name = "اختر اللاعب",
     Options = (function()
