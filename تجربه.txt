@@ -1253,7 +1253,7 @@ AddButton(Main, {
 AddSection(Main, {"رجل"})
 
 AddButton(Main, {
-    Name = "♡ رجل مقطوعه للبنت ♡",
+    Name = "رجل مقطوعه للبنت",
     Callback = function()
         local args = {
             [1] = {
@@ -1270,7 +1270,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡ رجل مقطوعه للولد ♡",
+    Name = "رجل مقطوعه للولد",
     Callback = function()
         local args = {
             [1] = {
@@ -1287,7 +1287,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡ راس روبوت او فضائي ♡",
+    Name = "راس روبوت او فضائي",
     Callback = function()
         local args = {
             [1] = 3210773801;
@@ -1297,7 +1297,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡ راس مخفي ♡",
+    Name = "راس مخفي",
     Callback = function()
         local args = {
             [1] = 134082579;
@@ -1307,7 +1307,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡ راس عيون زرقاء المخفي ♡",
+    Name = "راس عيون زرقاء المخفي",
     Callback = function()
         local args = {
             [1] = 16580493236;
@@ -1317,7 +1317,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡ راس كوبي او الرول ♡",
+    Name = "راس كوبي او الرول",
     Callback = function()
         local args = {
             [1] = 746767604;
@@ -1327,7 +1327,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡ رجل حديديه طويله ♡",
+    Name = "رجل حديديه طويله",
     Callback = function()
         local args = {
             [1] = {
@@ -1344,7 +1344,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡ رجل العضام السوداء الطويله ♡",
+    Name = "رجل العضام السوداء الطويله",
     Callback = function()
         local args = {
             [1] = {
@@ -1361,7 +1361,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡ رجل العضام البيضاء الطويله ♡",
+    Name = "رجل العضام البيضاء الطويله",
     Callback = function()
         local args = {
             [1] = {
@@ -1378,7 +1378,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡ رجل الرول ♡",
+    Name = "رجل الرول",
     Callback = function()
         local args = {
             [1] = {
@@ -1394,11 +1394,11 @@ AddButton(Main, {
     end
 })
 
-AddSection(Main, {"♡ اجسام ولد وبنت ♡"})
+AddSection(Main, {"اجسام ولد وبنت"})
 
 
 AddButton(Main, {
-    Name = "♡  جسم بنت خصر صغير  ♡",
+    Name = "جسم بنت خصر صغير",
     Callback = function()
         local args = {
             [1] = {
@@ -1416,7 +1416,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم بنت خصر ضعيف  ♡",
+    Name = "جسم بنت خصر ضعيف",
     Callback = function()
         local args = {
             [1] = {
@@ -1434,7 +1434,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم بنت رقم 1  ♡",
+    Name = "جسم بنت رقم 1",
     Callback = function()
         local args = {
             [1] = {
@@ -1452,7 +1452,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم بنت رقم 2  ♡",
+    Name = "جسم بنت رقم 2",
     Callback = function()
         local args = {
             [1] = {
@@ -1470,7 +1470,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم بنت رقم 3  ♡",
+    Name = "جسم بنت رقم 3",
     Callback = function()
         local args = {
             [1] = {
@@ -1488,7 +1488,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم بنت رقم 4  ♡",
+    Name = "جسم بنت رقم 4",
     Callback = function()
         local args = {
             [1] = {
@@ -1506,7 +1506,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم ولد يجنن  ♡",
+    Name = "جسم ولد يجنن",
     Callback = function()
         local args = {
             [1] = {
@@ -1524,7 +1524,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم ولد ضعيف  ♡",
+    Name = "جسم ولد ضعيف",
     Callback = function()
         local args = {
             [1] = {
@@ -1542,7 +1542,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم ولد رول  ♡",
+    Name = "جسم ولد رول",
     Callback = function()
         local args = {
             [1] = {
@@ -1560,7 +1560,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم ولد كوبي  ♡",
+    Name = "جسم ولد كوبي",
     Callback = function()
         local args = {
             [1] = {
@@ -1578,7 +1578,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم ولد معضل  ♡",
+    Name = "جسم ولد معضل",
     Callback = function()
         local args = {
             [1] = {
@@ -1596,10 +1596,10 @@ AddButton(Main, {
 })
 
 
-AddSection(Main, {"♡ اجسام القزم ♡"})
+AddSection(Main, {"اجسام القزم"})
 
 AddButton(Main, {
-    Name = "♡  جسم القزم  ♡",
+    Name = "جسم القزم",
     Callback = function()
         local args = {
             [1] = {
@@ -1617,7 +1617,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم القزم المتوسط  ♡",
+    Name = "جسم القزم المتوسط",
     Callback = function()
         local args = {
             [1] = {
@@ -1635,7 +1635,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم القزم القصير  ♡",
+    Name = "جسم القزم القصير",
     Callback = function()
         local args = {
             [1] = {
@@ -1653,7 +1653,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم القزم المتوسط تقريباً  ♡",
+    Name = "جسم القزم المتوسط تقريباً",
     Callback = function()
         local args = {
             [1] = {
@@ -1671,7 +1671,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم الهامستر  ♡",
+    Name = "جسم الهامستر",
     Callback = function()
         local args = {
             [1] = {
@@ -1689,11 +1689,11 @@ AddButton(Main, {
 })
 
 
-AddSection(Main, {"♡ اجسام غريبه عجييه ♡"})
+AddSection(Main, {"اجسام غريبه عجيبه"})
 
 
 AddButton(Main, {
-    Name = "♡  جسم روبوت  ♡",
+    Name = "جسم روبوت ",
     Callback = function()
         local args = {
             [1] = {
@@ -1711,7 +1711,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم هالك  ♡",
+    Name = "جسم هالك",
     Callback = function()
         local args = {
             [1] = {
@@ -1729,7 +1729,7 @@ AddButton(Main, {
 })
 
 AddButton(Main, {
-    Name = "♡  جسم كرسي  ♡",
+    Name = "جسم كرسي",
     Callback = function()
         local args = {
             [1] = {
@@ -3972,7 +3972,7 @@ game:GetService("ReplicatedStorage").RE:FindFirstChild("1NoMoto1rVehicle1s"):Fir
   end
 })
 -- ✔️ تاب أدوات قتل و فلنق
-local Troll = MakeTab({Name = "اشياء fe"})
+local Troll = MakeTab({Name = "اشياء fe و اللاعب"})
 
 AddButton(Troll, {
     Name = "1x1x1x1",
@@ -4009,8 +4009,203 @@ AddButton(Troll, {
     end
 })
 
-AddSection(Main, {"تجميد"})
+AddSection(Main, {"لاعب"})
 
+
+local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ESP:Toggle(true)
+ESP.Players = false
+ESP.Names = false
+local Toggle = AddToggle(Main, {
+  Name = "تفعيل الكشف",
+  Default = false,
+  Callback = function(Value)
+    ESP.Players = Value
+  end
+})
+
+local Toggle = AddToggle(Main, {
+  Name = "الاسامي الاعبين",
+  Default = false,
+  Callback = function(Value)
+    ESP.Names = Value
+  end
+})
+
+AddColorPicker(Main, {
+  Name = "اختار لون",
+  Default = Color3.fromRGB(255, 255, 0),
+  Callback = function(Value)
+    ESP.Color = Value
+  end
+})
+
+AddButton(Main, {
+  Name = "♡ تـعـليق السيرفـر (يحتاج وقت شويــه) ♡",
+  Callback = function()
+tools = "FireX"
+        shutdownserver = true
+        if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+            task.wait()
+            game.Players.LocalPlayer.Character.Humanoid.Sit = false
+        end
+        if game:GetService("Workspace"):FindFirstChild("Camera") then
+            game:GetService("Workspace"):FindFirstChild("Camera"):Destroy()
+        end
+        wait(0.1)
+        if game:GetService("Workspace"):FindFirstChild("Camera") then
+            game:GetService("Workspace"):FindFirstChild("Camera"):Destroy()
+        end
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").WorkspaceCom["001_GiveTools"].FireX.CFrame + Vector3.new(0, -15, 0)
+        task.wait(0.2)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+        ddos = true
+        for i = 1, 1350 do
+            task.wait()
+            if ddos == false then
+                local args = {
+                    [1] = "ClearAllTools"
+                } 
+                cleartoolremote:FireServer(unpack(args))
+                game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9999, -475, 9999)
+                return
+            end
+            if game:GetService("Workspace"):FindFirstChild("Camera") then
+                game:GetService("Workspace"):FindFirstChild("Camera"):Destroy()
+            end
+            if game:GetService("Players").LocalPlayer.Character:FindFirstChild(tools) then
+                game:GetService("Players").LocalPlayer.Character:FindFirstChild(tools):Destroy()
+            end
+            if ddos == false then return end
+            fireclickdetector(game:GetService("Workspace").WorkspaceCom["001_GiveTools"].FireX.ClickDetector, 0)
+        end
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, -475, 0)
+  end
+})
+
+local playerCountLabel = AddTextLabel(Main, "الاعبين في السيرفر: 0")
+local function updatePlayerCount()
+    playerCountLabel.Text = "الاعبين في السيرفر: " .. #game.Players:GetPlayers()
+end
+game.Players.PlayerAdded:Connect(function()
+    updatePlayerCount()
+end)
+game.Players.PlayerRemoving:Connect(function()
+    updatePlayerCount()
+end)
+updatePlayerCount()
+
+AddButton(Main, {
+  Name = "♡ تـنزع ملابسك ♡",
+  Callback = function()
+    local args = {
+    [1] = "wear",
+    [2] = 2248242028
+}
+
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1Updat1eAvata1r"):FireServer(unpack(args))
+wait(0.1)
+   local args = {
+    [1] = "wear",
+    [2] = 2547392639
+}
+
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1Updat1eAvata1r"):FireServer(unpack(args))
+  end
+})
+
+AddButton(Main, {
+  Name = "♡ اخذ كنبهٌ ♡",
+  Callback = function()
+    local args={[1]="PickingTools",[2]="Couch"};game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer(unpack(args))
+  end
+})
+
+AddButton(Main, {
+  Name = "♡ ازاله الاشياء من الانفنتوري ♡",
+  Callback = function()
+local args = {
+    [1] = "ClearAllTools"
+}
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1Clea1rTool1s"):FireServer(unpack(args))
+  end
+})
+
+AddButton(Main, {
+  Name = "♡ اختـفاء ♡",
+  Callback = function()
+local args = {
+    [1] = "CharacterSizeUp",
+    [2] = 6
+}
+
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1Clothe1s"):FireServer(unpack(args))
+  end
+})
+
+AddButton(Main, {
+  Name = "♡ الغـاء الاخـتفاء ♡",
+  Callback = function()
+local args = {
+    [1] = "CharacterSizeUp",
+    [2] = 1
+}
+
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1Clothe1s"):FireServer(unpack(args))
+  end
+})
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local noclipConnection
+local isNoclipActive = false
+local modifiedParts = {}
+local function enableNoclip()
+	if noclipConnection then noclipConnection:Disconnect() end
+	noclipConnection = RunService.Stepped:Connect(function()
+		for _, part in ipairs(character:GetDescendants()) do
+			if part:IsA("BasePart") and part.CanCollide == true then
+				part.CanCollide = false
+				modifiedParts[part] = true
+			end
+		end
+	end)
+	isNoclipActive = true
+end
+local function disableNoclip()
+	if noclipConnection then
+		noclipConnection:Disconnect()
+	end
+	for part, _ in pairs(modifiedParts) do
+		if part and part:IsA("BasePart") then
+			part.CanCollide = true
+		end
+	end
+	modifiedParts = {}
+	isNoclipActive = false
+end
+player.CharacterAdded:Connect(function(newChar)
+	character = newChar
+	if isNoclipActive then
+		newChar:WaitForChild("HumanoidRootPart", 5)
+		enableNoclip()
+	end
+end)
+local Toggle = AddToggle(Main, {
+	Name = "أختـراق الجدار & تشيل الطــرد",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+			enableNoclip()
+		else
+			disableNoclip()
+		end
+	end
+})
 -- ⚠️❄️ تجميد قوي • Freeze Power ❄️⚠️
 
 local Main = MakeTab({Name = "تجميد و سكنات"})
