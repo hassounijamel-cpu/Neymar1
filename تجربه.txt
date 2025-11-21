@@ -4356,7 +4356,7 @@ AddButton(Main, {
     end
 })
 
-AddSection(Main, {"تحميد قوي"})
+AddSection(Main, {"تجميد قوي"})
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -4368,160 +4368,123 @@ local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
 local ToolEvent = RE:FindFirstChild("1Too1l")
 local FireEvent = RE:FindFirstChild("1Gu1n")
 
--- حالات التجميد
-local isFreezeAll = false
-local isFreezeSingle = false
+-- حالات
+local freezeAll = false
+local freezeSingle = false
 local targetPlayer = nil
 
 ----------------------------------------------------------
 -- 🔧 تنظيف الأدوات
 ----------------------------------------------------------
-local function clearAllTools()
+local function clearTools()
     if ClearEvent then
         ClearEvent:FireServer("ClearAllTools")
     end
 end
 
 ----------------------------------------------------------
--- 🔫 الحصول على السلاح
+-- 🔫 أخذ السلاح
 ----------------------------------------------------------
-local function getAssault()
+local function takeAssault()
     if ToolEvent then
         ToolEvent:InvokeServer("PickingTools", "Assault")
     end
 end
 
 ----------------------------------------------------------
--- 🧰 هل عندك السلاح؟
+-- 🧰 هل عندك سلاح؟
 ----------------------------------------------------------
 local function hasAssault()
-    local backpack = Player:FindFirstChild("Backpack")
-    local character = Player.Character
-    return (backpack and backpack:FindFirstChild("Assault"))
-        or (character and character:FindFirstChild("Assault"))
+    local bp = Player:FindFirstChild("Backpack")
+    local ch = Player.Character
+    return (bp and bp:FindFirstChild("Assault")) or (ch and ch:FindFirstChild("Assault"))
 end
 
 ----------------------------------------------------------
--- ❄️ أقوى إطلاق Freeze Power
+-- ❄️ إطلاق على جزء
 ----------------------------------------------------------
-local function fireAtPart(targetPart)
-    if not targetPart then return end
+local function fireAt(hrp)
+    if not hrp then return end
 
-    local gunScript
-    local char = Player.Character
+    local gun = nil
+    local ch = Player.Character
 
-    if char and char:FindFirstChild("Assault") then
-        gunScript = char.Assault:FindFirstChild("GunScript_Local")
+    if ch and ch:FindFirstChild("Assault") then
+        gun = ch.Assault:FindFirstChild("GunScript_Local")
     elseif Player.Backpack and Player.Backpack:FindFirstChild("Assault") then
-        gunScript = Player.Backpack.Assault:FindFirstChild("GunScript_Local")
+        gun = Player.Backpack.Assault:FindFirstChild("GunScript_Local")
     end
 
-    if not gunScript then return end
-
-    -- قوة عالية جداً تحاكي 100 مليون ضربة
-    local freezePower = {
-        100000000,
-        Vector3.new(1e8, 1e8, 1e8),
-        BrickColor.new(29),
-        0.25,
-        Enum.Material.SmoothPlastic,
-        0.25
-    }
+    if not gun then return end
 
     local args = {
-        targetPart,
-        targetPart,
-        Vector3.new(1e14, 1e14, 1e14),
-        targetPart.Position,
-        gunScript:FindFirstChild("MuzzleEffect"),
-        gunScript:FindFirstChild("HitEffect"),
-        0,
-        0,
-        { false },
-        freezePower,
-        true,
-        false
+        hrp, hrp, Vector3.new(1e14, 1e14, 1e14), hrp.Position,
+        gun:FindFirstChild("MuzzleEffect"),
+        gun:FindFirstChild("HitEffect"),
+        0, 0, {false},
+        {25, Vector3.new(200,200,200), BrickColor.new(29), 0.25, Enum.Material.SmoothPlastic, 0.25},
+        true, false
     }
 
-    -- Turbo Freeze 20 مرة فورية
-    for i = 1, 20 do
+    -- إطلاق سريع 10 مرات (Turbo Freeze)
+    for i=1,10 do
         FireEvent:FireServer(unpack(args))
     end
 end
 
 ----------------------------------------------------------
--- ♻️ الحلقة الأساسية
+-- ♻️ الحلقة الأساسية: يأخذ / يطلق / يحذف / يعيد
 ----------------------------------------------------------
 task.spawn(function()
     while true do
-        if isFreezeAll or isFreezeSingle then
-            clearAllTools()
-            getAssault()
+        
+        if freezeAll or freezeSingle then
+            clearTools()
+            takeAssault()
 
-            repeat task.wait(0.2)
-            until hasAssault() or not (isFreezeAll or isFreezeSingle)
+            repeat task.wait(0.15)
+            until hasAssault() or not (freezeAll or freezeSingle)
 
             if hasAssault() then
-
-                -- تجميد الكل
-                if isFreezeAll then
+                
+                -- 🔥 تجميد الكل
+                if freezeAll then
                     for _, p in ipairs(Players:GetPlayers()) do
-                        if not isFreezeAll then break end
+                        if not freezeAll then break end
                         if p ~= Player and p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
-                            fireAtPart(p.Character.HumanoidRootPart)
-                            task.wait(0.02)
+                            fireAt(p.Character.HumanoidRootPart)
                         end
                     end
                 end
 
-                -- تجميد لاعب معيّن
-                if isFreezeSingle and targetPlayer
-                    and targetPlayer.Character
-                    and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    
-                    fireAtPart(targetPlayer.Character.HumanoidRootPart)
-                    task.wait(0.02)
+                -- 🔒 تجميد لاعب معيّن
+                if freezeSingle and targetPlayer and targetPlayer.Character then
+                    local hrp = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+                    fireAt(hrp)
                 end
             end
         end
 
-        task.wait(0.2)
+        task.wait(0.15)
     end
 end)
 
 ----------------------------------------------------------
--- ⚙️ الواجهة
+-- 🧊 الواجهة
 ----------------------------------------------------------
 
-AddSection(Main, {"❄️ تجميد الكل"})
-
-AddButton(Main, {
-    Name = "تشغيل تجميد الكل ❄️",
-    Callback = function()
-        isFreezeAll = true
-        isFreezeSingle = false
-    end
-})
-
-AddButton(Main, {
-    Name = "إيقاف تجميد الكل ⛔",
-    Callback = function()
-        isFreezeAll = false
-    end
-})
+AddSection(Main, {"تجميد قوي"})
 
 ----------------------------------------------------------
-
-AddSection(Main, {"🎯 تجميد لاعب معيّن"})
+-- 🎯 اختيار اللاعب
+----------------------------------------------------------
 
 AddDropdown(Main, {
     Name = "اختر اللاعب",
     Options = (function()
         local list = {}
         for _, p in ipairs(Players:GetPlayers()) do
-            if p ~= Player then
-                table.insert(list, p.Name)
-            end
+            if p ~= Player then table.insert(list, p.Name) end
         end
         return list
     end)(),
@@ -4531,20 +4494,42 @@ AddDropdown(Main, {
     end
 })
 
+----------------------------------------------------------
+-- 🔒 تجميد لاعب
+----------------------------------------------------------
+
 AddButton(Main, {
     Name = "تشغيل تجميد اللاعب 🔒",
     Callback = function()
         if targetPlayer then
-            isFreezeSingle = true
-            isFreezeAll = false
+            freezeSingle = true
+            freezeAll = false
         end
     end
 })
 
+----------------------------------------------------------
+-- ❄️ تجميد الكل
+----------------------------------------------------------
+
 AddButton(Main, {
-    Name = "إيقاف تجميد اللاعب ⛔",
+    Name = "تشغيل تجميد الكل ❄️",
     Callback = function()
-        isFreezeSingle = false
+        freezeAll = true
+        freezeSingle = false
+    end
+})
+
+----------------------------------------------------------
+-- ⛔ إيقاف التجميد
+----------------------------------------------------------
+
+AddButton(Main, {
+    Name = "إلغاء التجميد ⛔",
+    Callback = function()
+        freezeAll = false
+        freezeSingle = false
+        clearTools()
     end
 })
 
