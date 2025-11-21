@@ -1,0 +1,92 @@
+local RunService = game:GetService("RunService")
+
+local frameIds = {
+    114772686664133,
+    111804512261408,
+    123983950568966,
+    127906745178338,
+    122784828249694,
+    102664062439070,
+    110318226504557,
+    101638615203319,
+    136700988033378,
+    125553365218235,
+    84668476638599,
+    121954351861171,
+    90220771312816,
+    72797380953483,
+    99787029828291,
+    117721225607544,
+    103118875451181,
+    131994340516196,
+    112098188131922,
+    90005368665668,
+    122909219290482,
+    90445687686692,
+    85699367950707,
+    122794761229376,
+    134384823603099,
+    80023116512175,
+    94873988319170,
+}
+
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "Remix Hub"
+screenGui.IgnoreGuiInset = true
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+local background = Instance.new("ImageLabel")
+background.Size = UDim2.new(1, 0, 1, 0)
+background.Position = UDim2.new(0, 0, 0, 0)
+background.BackgroundTransparency = 1
+background.Image = "rbxassetid://94067569796788"
+background.ScaleType = Enum.ScaleType.Crop
+background.ResampleMode = Enum.ResamplerMode.Pixelated
+background.ZIndex = 0
+background.Parent = screenGui
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 0.2, 0)
+textLabel.Position = UDim2.new(0, 0, 0.4, 0)
+textLabel.BackgroundTransparency = 1
+textLabel.Text = "Neymar Hub"
+textLabel.Font = Enum.Font.BuilderSansBold
+textLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+textLabel.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+textLabel.TextStrokeTransparency = 0
+textLabel.TextScaled = true
+textLabel.ZIndex = 10
+textLabel.Parent = screenGui
+
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://111741187505252"
+sound.PlaybackSpeed = 1.5
+sound.Parent = screenGui
+sound:Play()
+
+local fps = 10
+local interval = 1 / fps
+
+for repeatCount = 1, 2 do
+ for i, id in ipairs(frameIds) do
+  local frame = Instance.new("ImageLabel")
+  frame.Size = UDim2.new(1, 0, 1, 0)
+  frame.BackgroundTransparency = 1
+  frame.Image = "rbxassetid://" .. id
+  frame.ScaleType = Enum.ScaleType.Crop
+  frame.ResampleMode = Enum.ResamplerMode.Pixelated
+  frame.ZIndex = 5
+  frame.Parent = screenGui
+
+  RunService.RenderStepped:Wait()
+  task.wait(interval)
+
+  frame:Destroy()
+ end
+end
+
+screenGui:Destroy()
