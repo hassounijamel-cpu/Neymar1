@@ -9920,9 +9920,9 @@ Tab11:AddButton({
 })
 
 Tab11:AddButton({
-    Name = "رقصات",
-    Description = "رقصات تظهر للناس",
+    Name = "R6",
+    Description = " يسوي سكنك R6",
     Callback = function()
-        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Rtx-graphics-25102"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/Neymar1/refs/heads/main/R6%20anims.lua"))()
     end
 })
