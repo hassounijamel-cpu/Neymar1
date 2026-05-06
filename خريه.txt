@@ -12,9 +12,64 @@ Window:AddMinimizeButton({
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
-local InfoTab = Window:MakeTab({ Title = "الحقوق", Icon = "rbxassetid://125602848737897" })
+local InfoTab = Window:MakeTab({ 
+	Title = "الحقوق", 
+	Icon = "rbxassetid://125602848737897" 
+})
 
+-- 🔥 أول شي: الدالة داخل التاب
+function InfoTab:AddImageUsers(Configs)
 
+	local Background = Configs.Background or ""
+
+	local Image1 = Configs.Image1 or ""
+	local Image2 = Configs.Image2 or ""
+	local Image3 = Configs.Image3 or ""
+
+	local Copy1 = Configs.Copy1 or ""
+	local Copy2 = Configs.Copy2 or ""
+	local Copy3 = Configs.Copy3 or ""
+
+	local Holder = Create("Frame", Container, {
+		Size = UDim2.new(1,0,0,220),
+		BackgroundColor3 = Theme["Color Hub 2"],
+		BorderColor3 = Theme["Color Stroke"],
+		BorderSizePixel = 2
+	})
+
+	Create("UICorner", Holder, { CornerRadius = UDim.new(0,12) })
+	Create("UIStroke", Holder, { Color = Theme["Color Stroke"], Thickness = 1.5 })
+
+	local function MakeUser(Pos, Img, CopyText)
+
+		local Image = Create("ImageLabel", Holder, {
+			Size = UDim2.new(0,60,0,60),
+			Position = Pos,
+			BackgroundTransparency = 1,
+			Image = Img
+		})
+
+		Create("UICorner", Image, { CornerRadius = UDim.new(1,0) })
+
+		local Button = Create("TextButton", Holder, {
+			Size = UDim2.new(0,70,0,28),
+			Position = UDim2.new(Pos.X.Scale, Pos.X.Offset-5, 0, 150),
+			Text = "Copy"
+		})
+
+		Button.MouseButton1Click:Connect(function()
+			setclipboard(CopyText)
+		end)
+
+	end
+
+	MakeUser(UDim2.new(0.2,-30,0,80), Image1, Copy1)
+	MakeUser(UDim2.new(0.5,-30,0,80), Image2, Copy2)
+	MakeUser(UDim2.new(0.8,-30,0,80), Image3, Copy3)
+
+end
+
+-- 🔽 بعدها نفس معلوماتك بدون تغيير
 InfoTab:AddSection({ "معلومات سكربت" })
 InfoTab:AddParagraph({ "Kdkjdnde المطور: نيمار حساب روب" })
 InfoTab:AddParagraph({ "TIK TOK: WLV22" })
