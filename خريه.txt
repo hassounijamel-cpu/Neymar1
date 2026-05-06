@@ -17,7 +17,7 @@ local InfoTab = Window:MakeTab({
 	Icon = "rbxassetid://125602848737897" 
 })
 
--- 🔥 أول شي: الدالة داخل التاب
+-- 🔥 الدالة داخل التاب
 function InfoTab:AddImageUsers(Configs)
 
 	local Background = Configs.Background or ""
@@ -54,8 +54,16 @@ function InfoTab:AddImageUsers(Configs)
 		local Button = Create("TextButton", Holder, {
 			Size = UDim2.new(0,70,0,28),
 			Position = UDim2.new(Pos.X.Scale, Pos.X.Offset-5, 0, 150),
-			Text = "Copy"
+			BackgroundColor3 = Theme["Color Button"],
+			Text = "Copy",
+			Font = Enum.Font.GothamBold,
+			TextSize = 14,
+			TextColor3 = Theme["Color Text"],
+			BorderSizePixel = 0
 		})
+
+		Create("UICorner", Button, { CornerRadius = UDim.new(0,6) })
+		Create("UIStroke", Button, { Color = Theme["Color Stroke"], Thickness = 1.2 })
 
 		Button.MouseButton1Click:Connect(function()
 			setclipboard(CopyText)
@@ -69,10 +77,23 @@ function InfoTab:AddImageUsers(Configs)
 
 end
 
--- 🔽 بعدها نفس معلوماتك بدون تغيير
+-- 🔽 معلومات التاب
 InfoTab:AddSection({ "معلومات سكربت" })
 InfoTab:AddParagraph({ "Kdkjdnde المطور: نيمار حساب روب" })
 InfoTab:AddParagraph({ "TIK TOK: WLV22" })
 InfoTab:AddParagraph({ "GUI: NH" })
 InfoTab:AddParagraph({ "حسابي تلي" })
 InfoTab:AddParagraph({ "Telegram: @WLV66" })
+
+-- 🔥 استدعاء الأزرار تحت المعلومات
+InfoTab:AddImageUsers({
+	Background = "rbxassetid://125602848737897",
+
+	Image1 = "rbxassetid://111111111",
+	Image2 = "rbxassetid://222222222",
+	Image3 = "rbxassetid://333333333",
+
+	Copy1 = "WLV22",
+	Copy2 = "@WLV66",
+	Copy3 = "Neymar Hub"
+})
