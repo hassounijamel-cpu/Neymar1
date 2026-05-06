@@ -2978,7 +2978,54 @@ end
 	
 	CloseButton.Activated:Connect(Window.CloseBtn)
 	MinimizeButton.Activated:Connect(Window.MinimizeBtn)
-	return Window
+
+-- شاشة البداية
+local IntroGui = Instance.new("ScreenGui")
+IntroGui.Name = "IntroGui"
+IntroGui.Parent = game:GetService("CoreGui")
+
+local Frame = Instance.new("Frame")
+Frame.Parent = IntroGui
+Frame.Size = UDim2.new(1,0,1,0)
+Frame.BackgroundColor3 = Color3.fromRGB(0,0,0)
+
+local Text = Instance.new("TextLabel")
+Text.Parent = Frame
+Text.Size = UDim2.new(1,0,0.2,0)
+Text.Position = UDim2.new(0,0,0.4,0)
+Text.BackgroundTransparency = 1
+Text.Text = "مرحبا بك في سكربت نيمار / حسنين"
+Text.TextColor3 = Color3.fromRGB(255,255,255)
+Text.TextScaled = true
+
+local StartBtn = Instance.new("TextButton")
+StartBtn.Parent = Frame
+StartBtn.Size = UDim2.new(0.3,0,0.1,0)
+StartBtn.Position = UDim2.new(0.35,0,0.6,0)
+StartBtn.BackgroundColor3 = Color3.fromRGB(50,50,50)
+StartBtn.Text = "ابدأ السكربت"
+StartBtn.TextColor3 = Color3.fromRGB(255,255,255)
+StartBtn.Visible = false
+
+-- نخفي الواجهة بالبداية
+pcall(function()
+	Window:Visible(false)
+end)
+
+-- بعد ثانيتين يطلع الزر
+task.delay(2, function()
+	StartBtn.Visible = true
+end)
+
+-- عند الضغط
+StartBtn.MouseButton1Click:Connect(function()
+	IntroGui:Destroy()
+	pcall(function()
+		Window:Visible(true)
+	end)
+end)
+
+return Window
 end
 return redzlib
 
