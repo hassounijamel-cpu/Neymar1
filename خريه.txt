@@ -12,88 +12,102 @@ Window:AddMinimizeButton({
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
-local InfoTab = Window:MakeTab({ 
-	Title = "الحقوق", 
-	Icon = "rbxassetid://125602848737897" 
-})
-
--- 🔥 الدالة داخل التاب
-function InfoTab:AddImageUsers(Configs)
-
-	local Background = Configs.Background or ""
-
-	local Image1 = Configs.Image1 or ""
-	local Image2 = Configs.Image2 or ""
-	local Image3 = Configs.Image3 or ""
-
-	local Copy1 = Configs.Copy1 or ""
-	local Copy2 = Configs.Copy2 or ""
-	local Copy3 = Configs.Copy3 or ""
-
-	local Holder = Create("Frame", Container, {
-		Size = UDim2.new(1,0,0,220),
-		BackgroundColor3 = Theme["Color Hub 2"],
-		BorderColor3 = Theme["Color Stroke"],
-		BorderSizePixel = 2
-	})
-
-	Create("UICorner", Holder, { CornerRadius = UDim.new(0,12) })
-	Create("UIStroke", Holder, { Color = Theme["Color Stroke"], Thickness = 1.5 })
-
-	local function MakeUser(Pos, Img, CopyText)
-
-		local Image = Create("ImageLabel", Holder, {
-			Size = UDim2.new(0,60,0,60),
-			Position = Pos,
-			BackgroundTransparency = 1,
-			Image = Img
-		})
-
-		Create("UICorner", Image, { CornerRadius = UDim.new(1,0) })
-
-		local Button = Create("TextButton", Holder, {
-			Size = UDim2.new(0,70,0,28),
-			Position = UDim2.new(Pos.X.Scale, Pos.X.Offset-5, 0, 150),
-			BackgroundColor3 = Theme["Color Button"],
-			Text = "Copy",
-			Font = Enum.Font.GothamBold,
-			TextSize = 14,
-			TextColor3 = Theme["Color Text"],
-			BorderSizePixel = 0
-		})
-
-		Create("UICorner", Button, { CornerRadius = UDim.new(0,6) })
-		Create("UIStroke", Button, { Color = Theme["Color Stroke"], Thickness = 1.2 })
-
-		Button.MouseButton1Click:Connect(function()
-			setclipboard(CopyText)
-		end)
-
-	end
-
-	MakeUser(UDim2.new(0.2,-30,0,80), Image1, Copy1)
-	MakeUser(UDim2.new(0.5,-30,0,80), Image2, Copy2)
-	MakeUser(UDim2.new(0.8,-30,0,80), Image3, Copy3)
-
+```lua
+local BangTab = Window:MakeTab({ Title = "تخريب", Icon = "rbxassetid://10723407498" })
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Button = workspace.WorkspaceCom["001_CanoeCloneButton"].Button
+local ClickDetector = Button.ClickDetector
+local Storage = workspace.WorkspaceCom["001_CanoeStorage"]
+local SelectedPlayer = ""
+local AbductionActive = false
+local OriginalPos = nil
+BangTab:AddSection({ "قائمة اللاعبين" })
+local PlayerDropdown = BangTab:AddDropdown({
+Name = "اختر الضحية",
+Options = {},
+Default = "",
+Callback = function(Value)
+SelectedPlayer = Value
 end
-
--- 🔽 معلومات التاب
-InfoTab:AddSection({ "معلومات سكربت" })
-InfoTab:AddParagraph({ "Kdkjdnde المطور: نيمار حساب روب" })
-InfoTab:AddParagraph({ "TIK TOK: WLV22" })
-InfoTab:AddParagraph({ "GUI: NH" })
-InfoTab:AddParagraph({ "حسابي تلي" })
-InfoTab:AddParagraph({ "Telegram: @WLV66" })
-
--- 🔥 استدعاء الأزرار تحت المعلومات
-InfoTab:AddImageUsers({
-	Background = "rbxassetid://125602848737897",
-
-	Image1 = "rbxassetid://111111111",
-	Image2 = "rbxassetid://222222222",
-	Image3 = "rbxassetid://333333333",
-
-	Copy1 = "WLV22",
-	Copy2 = "@WLV66",
-	Copy3 = "Neymar Hub"
 })
+local function RefreshPlayers()
+local pList = {}
+for _, p in pairs(Players:GetPlayers()) do
+if p ~= LocalPlayer then table.insert(pList, p.Name) end
+end
+PlayerDropdown:SetOptions(pList)
+end
+BangTab:AddButton({
+Name = "تحديث القائمة",
+Callback = function()
+RefreshPlayers()
+end
+})
+BangTab:AddSection({ "نظام الخطف" })
+BangTab:AddToggle({
+Name = "خطف اللاعب المختار",
+Default = false,
+Callback = function(Value)
+AbductionActive = Value
+if Value then
+if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+OriginalPos = LocalPlayer.Character.HumanoidRootPart.CFrame
+end
+end
+end
+})
+task.spawn(function()
+while true do
+task.wait(0.1)
+if AbductionActive and SelectedPlayer ~= "" then
+local target = Players:FindFirstChild(SelectedPlayer)
+if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid") then
+local char = LocalPlayer.Character
+local hrp = char and char:FindFirstChild("HumanoidRootPart")
+local hum = char and char:FindFirstChild("Humanoid")
+if hrp and hum then
+hrp.CFrame = Button.CFrame * CFrame.new(0, 3, 0)
+task.wait(0.2)
+fireclickdetector(ClickDetector)
+local canoe = nil
+local waitTime = tick()
+repeat 
+task.wait(0.1)
+for _, v in pairs(Storage:GetChildren()) do
+if v.Name == "Canoe" then canoe = v break end
+end
+until canoe or (tick() - waitTime > 3) or not AbductionActive
+if canoe then
+local seat = canoe:FindFirstChildWhichIsA("VehicleSeat", true)
+if seat then
+hrp.CFrame = seat.CFrame * CFrame.new(0, 2, 0)
+task.wait(0.3)
+seat:Sit(hum)
+local timeout = tick()
+while AbductionActive and target.Character.Humanoid.SeatPart ~= seat and (tick() - timeout < 15) do
+if target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
+local tRoot = target.Character.HumanoidRootPart
+local shake = math.sin(tick() * 12) * 5
+seat.CFrame = tRoot.CFrame * CFrame.new(shake, -3, 0)
+end
+task.wait()
+end
+if target.Character.Humanoid.SeatPart == seat then
+task.wait(0.1)
+seat:Sit(nil)
+if OriginalPos then hrp.CFrame = OriginalPos end
+task.wait(0.1)
+seat.CFrame = CFrame.new(seat.Position.X, -1000, seat.Position.Z)
+AbductionActive = false
+end
+end
+end
+end
+end
+end
+end
+end)
+RefreshPlayers()
+
+```
