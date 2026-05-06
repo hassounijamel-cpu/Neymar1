@@ -2965,21 +2965,125 @@ end
 	end)
 
 	local DiscordInvite = {}
-	function DiscordInvite:Destroy()
-		InviteHolder:Destroy()
-	end
-	function DiscordInvite:Visible(...)
-		Funcs:ToggleVisible(InviteHolder, ...)
-	end
-	return DiscordInvite
+
+function DiscordInvite:Destroy()
+	InviteHolder:Destroy()
 end
+
+function DiscordInvite:Visible(...)
+	Funcs:ToggleVisible(InviteHolder, ...)
+end
+
+-- 🔥 إضافة Image Users داخل Tab
+function Tab:AddImageUsers(Configs)
+
+	local Title = Configs.Title or "Users"
+	local Background = Configs.Background or ""
+
+	local Image1 = Configs.Image1 or ""
+	local Image2 = Configs.Image2 or ""
+	local Image3 = Configs.Image3 or ""
+
+	local Copy1 = Configs.Copy1 or ""
+	local Copy2 = Configs.Copy2 or ""
+	local Copy3 = Configs.Copy3 or ""
+
+	local Holder = Create("Frame", Container, {
+		Size = UDim2.new(1,0,0,220),
+		BackgroundColor3 = Theme["Color Hub 2"],
+		BorderColor3 = Theme["Color Stroke"],
+		BorderSizePixel = 2
+	})
+
+	Create("UICorner", Holder, {
+		CornerRadius = UDim.new(0,12)
+	})
+
+	Create("UIStroke", Holder, {
+		Color = Theme["Color Stroke"],
+		Thickness = 1.5
+	})
+
+	local BgImage = Create("ImageLabel", Holder, {
+		Size = UDim2.new(1,0,0,120),
+		BackgroundTransparency = 1,
+		Image = Background
+	})
+
+	Create("UICorner", BgImage, {
+		CornerRadius = UDim.new(0,12)
+	})
+
+	local function MakeUser(Pos, Img, CopyText)
+
+		local Image = Create("ImageLabel", Holder, {
+			Size = UDim2.new(0,60,0,60),
+			Position = Pos,
+			BackgroundTransparency = 1,
+			Image = Img
+		})
+
+		Create("UICorner", Image, {
+			CornerRadius = UDim.new(1,0)
+		})
+
+		Create("UIStroke", Image, {
+			Color = Theme["Color Stroke"],
+			Thickness = 1.5
+		})
+
+		local Button = Create("TextButton", Holder, {
+			Size = UDim2.new(0,70,0,28),
+			Position = UDim2.new(Pos.X.Scale, Pos.X.Offset-5, 0, 150),
+			BackgroundColor3 = Theme["Color Button"],
+			Text = "Copy",
+			Font = Enum.Font.GothamBold,
+			TextSize = 14,
+			TextColor3 = Theme["Color Text"],
+			BorderSizePixel = 0
+		})
+
+		Create("UICorner", Button, {
+			CornerRadius = UDim.new(0,6)
+		})
+
+		Create("UIStroke", Button, {
+			Color = Theme["Color Stroke"],
+			Thickness = 1.2
+		})
+
+		Button.MouseEnter:Connect(function()
+			Button.BackgroundColor3 = Theme["Color Theme"]
+		end)
+
+		Button.MouseLeave:Connect(function()
+			Button.BackgroundColor3 = Theme["Color Button"]
+		end)
+
+		Button.MouseButton1Click:Connect(function()
+			setclipboard(CopyText)
+		end)
+
+	end
+
+	MakeUser(UDim2.new(0.2,-30,0,80), Image1, Copy1)
+	MakeUser(UDim2.new(0.5,-30,0,80), Image2, Copy2)
+	MakeUser(UDim2.new(0.8,-30,0,80), Image3, Copy3)
+
+end
+
+return DiscordInvite
+end
+
 return Tab
 end
-	
-	CloseButton.Activated:Connect(Window.CloseBtn)
-	MinimizeButton.Activated:Connect(Window.MinimizeBtn)
-	return Window
+
+CloseButton.Activated:Connect(Window.CloseBtn)
+MinimizeButton.Activated:Connect(Window.MinimizeBtn)
+
+return Window
 end
+
 return redzlib
 
 -- SV LIB
