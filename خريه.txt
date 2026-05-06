@@ -1,0 +1,23 @@
+local Libary = loadstring(game:HttpGet("https://raw.githubusercontent.com/hassounijamel-cpu/0777/refs/heads/main/%D9%88%D8%A7%D8%AC%D9%87%D9%87%20%D9%85%D8%B3%D8%AA%D8%B7%D9%8A%D9%84%D8%A9.txt"))()
+workspace.FallenPartsDestroyHeight = -math.huge
+
+Window = Libary:MakeWindow({
+    Title = "Neymar Hub",
+    SubTitle = "By Neymar",
+    LoadText = "Neymar The Beast",
+    Flags = "NeymarHub_Brookhaven"
+})
+Window:AddMinimizeButton({
+    Button = { Image = "rbxassetid://125602848737897", BackgroundTransparency = 0 },
+    Corner = { CornerRadius = UDim.new(35, 1) },
+})
+
+local InfoTab = Window:MakeTab({ Title = "الحقوق", Icon = "rbxassetid://125602848737897" })
+
+
+InfoTab:AddSection({ "معلومات سكربت" })
+InfoTab:AddParagraph({ "Kdkjdnde المطور: نيمار حساب روب" })
+InfoTab:AddParagraph({ "TIK TOK: WLV22" })
+InfoTab:AddParagraph({ "GUI: NH" })
+InfoTab:AddParagraph({ "حسابي تلي" })
+InfoTab:AddParagraph({ "Telegram: @WLV66" })
